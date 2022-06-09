@@ -133,3 +133,4 @@ dmypy.json
 *.lnk
 dump1090/
 rtl-sdr/
+putty.desktop
