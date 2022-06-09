@@ -131,3 +131,5 @@ dmypy.json
 # My local settings / School specific
 *.rdp
 *.lnk
+dump1090/
+rtl-sdr/
