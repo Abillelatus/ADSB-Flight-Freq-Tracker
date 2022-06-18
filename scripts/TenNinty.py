@@ -64,7 +64,10 @@ class TenNinty_Parser:
                 TenNinty_Reader = csv.reader(csvfile, delimiter=',')
                 # Add Rows to raw data variable 
                 for row in TenNinty_Reader:
-                    if row[4] == '000000':
+                    # If the header or putty log info is included and needs to skip
+                    if "=~" in row[0]:
+                        pass
+                    elif row[4] == '000000':
                         pass
                     else:
                         tmp_arry.append(row)
@@ -141,7 +144,7 @@ class TenNinty_Parser:
         
 
 if __name__ == "__main__":
-    csv_location = "Z:\\Projects\\ADSB_Flight_Track\\Data\\Sample_Data\\30003_Sample_Data.csv"
+    csv_location = "Z:\\Projects\\ADSB-Flight-Freq-Tracker\\data\\adsb_sample_data\\30003_FlightLog_sample_Large.csv"
     process_data = TenNinty_Parser(csv_location)
     file_data = process_data.get_parsed_data(use_header=True)
 
