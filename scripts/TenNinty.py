@@ -2,7 +2,8 @@
 # TenNinty.py 
 # @author: Ryan Herrin
 #
-# Mulit-Class script  
+# Mulit-Class script for processing captured ADSB data and trasnforming it into
+# a custom tailored CSV file. 
 ################################################################################
 
 ''' 
@@ -18,7 +19,8 @@ Col[python index], Desc:
 [17], Squawk code
 '''
 
-import csv 
+import csv
+import datetime
 
 
 class TenNinty_Parser:
@@ -36,11 +38,16 @@ class TenNinty_Parser:
         out_x = str(x)
         print(out_x)
 
-    def get_parsed_data(self, use_header=False):
+    def get_parsed_data(self, use_header=False, to_csv=False):
         ''' Return parsed data. '''
         self.parse_file()
+
         if use_header:
             self._add_header()
+
+        # Write to CSV is to_csv is True 
+        if to_csv:
+            self.write_to_csv()
 
         return(self.dump_data)
 
@@ -141,15 +148,54 @@ class TenNinty_Parser:
 
         # Add the callsign row 
         self._add_callsign()
-        
 
-if __name__ == "__main__":
-    csv_location = "Z:\\Projects\\ADSB-Flight-Freq-Tracker\\data\\adsb_sample_data\\30003_FlightLog_sample_Large.csv"
-    process_data = TenNinty_Parser(csv_location)
-    file_data = process_data.get_parsed_data(use_header=True)
+    def write_to_csv(self):
+        ''' Writes self.dump to a CSV file that can be used to upload to a DB '''
+        # Use system time to name CSV
+        curr_time = datetime.datetime.now().strftime("%Y_%m_%d_%H%M%S")
+        # Define location to write CSV to
+        csv_write_loc = "/home/pi/Documents/Projects/ADSB-Flight-Freq-Tracker/data/adsb_processed_data/{}_log.csv".format(curr_time)
+        #print(csv_write_loc)
 
-    for i in file_data:
-        print(i)
+        with open(csv_write_loc, 'w', newline='') as csv_out:
+            data_writer = csv.writer(csv_out, delimiter=',')
+            for row in self.dump_data:
+                data_writer.writerow(row)
+
+class SnapShot:
+    ''' This class is to be run with a cron job to take snap shots of the live log 
+    file and write the data to a seperate file. Then clears the live feed file so 
+    it doesn't become overwhelmingly large. Seriously. Dis boy gets big real quick.
+    The plan is to have this run once an hour to keep the data size down. '''
+    
+    def __init__(self):
+        # Location of the live feed file 
+        self.live_feed_loc = "/home/pi/Documents/Projects/ADSB-Flight-Freq-Tracker/data/30003_LiveFeed.csv"
+
+    def snap_dat_feed(self):
+        ''' Capture the data currently in the file. '''
+        try:
+            # Process the captured data using the TenNinty_parser 
+            process_data = TenNinty_Parser(self.live_feed_loc)
+            # Write it out to a csv 
+            file_data = process_data.get_parsed_data(use_header=True, to_csv=True)
+
+            # If the write was complete then we can erase the contents of the live stream
+            # file 
+            try:
+                open(self.live_feed_loc, 'w').close()
+            except Exception as err:
+                # Well erasing the data didn't go as planned. Fudge.
+                print('Could not erase live feed file data...\n{}'.format(str(err)))
+
+        except Exception as err:
+            print("Could not write to CSV...\n{}".format(str(err)))            
+
+
+# Entry
+take_snap = SnapShot()
+take_snap.snap_dat_feed()
+
 
 
 
