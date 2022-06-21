@@ -19,7 +19,9 @@ Col[python index], Desc:
 [17], Squawk code
 '''
 
+import os
 import csv
+import shutil
 import datetime
 
 
@@ -107,6 +109,9 @@ class TenNinty_Parser:
             # If the first char is "N", then it's 99% a private aircraft
             elif flight_num[0] == "N":
                 self.dump_data[flight].append("Private")
+            else:
+                # If all else incase to keep the 8 row integrity
+                self.dump_data[flight].append('NA')
 
     def _add_header(self):
         '''Add header to beginning of array'''
@@ -179,6 +184,15 @@ class SnapShot:
             process_data = TenNinty_Parser(self.live_feed_loc)
             # Write it out to a csv 
             file_data = process_data.get_parsed_data(use_header=True, to_csv=True)
+
+            # Copy the log file to keep original raw file
+            curr_time_two = datetime.datetime.now().strftime("%Y_%m_%d_%H%M%S")
+            copy_to_loc = "/home/pi/Documents/Projects/ADSB-Flight-Freq-Tracker/data/adsb_raw_data/30003_LiveFeed.csv"
+            # Perform the copy
+            shutil.copyfile(self.live_feed_loc, copy_to_loc)
+            # Rename 
+            os.rename("/home/pi/Documents/Projects/ADSB-Flight-Freq-Tracker/data/adsb_raw_data/30003_LiveFeed.csv",
+                "/home/pi/Documents/Projects/ADSB-Flight-Freq-Tracker/data/adsb_raw_data/live_raw_{}".format(curr_time_two))
 
             # If the write was complete then we can erase the contents of the live stream
             # file 
