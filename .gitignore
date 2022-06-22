@@ -134,3 +134,18 @@ dmypy.json
 dump1090/
 rtl-sdr/
 #putty.desktop
+#Ignore Raw Data Dump.
+data/adsb_raw_data/
+
+
+
+
+
+
+
+
+
+
+
+
+
