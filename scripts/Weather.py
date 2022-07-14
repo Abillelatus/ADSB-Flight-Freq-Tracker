@@ -127,10 +127,10 @@ class Weather:
 		"""
 		pass
 
-
+'''
 if __name__ == "__main__":
 	curr_weather = Weather().get_current_weather("KFTW")
-
+'''
 
 
 
