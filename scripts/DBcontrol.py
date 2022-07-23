@@ -56,7 +56,6 @@ class MySQLdb:
 			self._commit()
 			db_cursor.close() # Close out the cursor
 			 
-			
 	def upload_flight_csv(self, csv_location):
 		"""Upload the data of the parsed flight data into the DB"""
 		# SQL insert statement 
