@@ -521,14 +521,14 @@ class Weather:
 		return(wunder_data)
 
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
 	'''
 	daily_weather, data_dict = Weather().get_daily_weather("KFTW", "2022-07-22")
 	daily_weather = Weather().convert_to_merica(daily_weather)
 	# Write out to weather location
 	Weather().write_daily_to_csv(daily_weather, global_weather_write_loc)
 	'''
-
+	'''
 	# Bulk update
 	wunder_dir = "Z:/Projects/ADSB-Flight-Freq-Tracker/data/.wunderground_wthr/"
 	list_of_files = os.listdir(wunder_dir)
@@ -537,12 +537,13 @@ if __name__ == "__main__":
 		w_path = wunder_dir + file
 		wunder_data = Weather().wunderground_convert(w_path)
 		Weather().write_daily_to_csv(wunder_data, global_weather_write_loc)
-
+	'''
 	'''
 	wunder_path = "Z:/Projects/ADSB-Flight-Freq-Tracker/data/.wunderground_wthr/2022-06-20.csv"
 	wunder_data = Weather().wunderground_convert(wunder_path)
 	Weather().write_daily_to_csv(wunder_data, global_weather_write_loc)
 	'''
+
 
 
 
