@@ -11,7 +11,7 @@ Date,Time,Weekday,BarometricPressure,Temp,WindSpeed,WindDirection,Raining
 2022-06-23,09:00:00,Thursday,29.28,91,6,VAR,No
 2022-06-23,10:00:00,Thursday,29.27,94,10,S,No
 2022-06-23,11:00:00,Thursday,29.25,96,8,S,No
-2022-06-23,24:00:00,Thursday,29.23,98,8,SE,No
+2022-06-23,12:00:00,Thursday,29.23,98,8,SE,No
 2022-06-23,13:00:00,Thursday,29.21,99,3,VAR,No
 2022-06-23,14:00:00,Thursday,29.18,100,6,VAR,No
 2022-06-23,15:00:00,Thursday,29.16,101,0,CALM,No

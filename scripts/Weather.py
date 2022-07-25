@@ -405,7 +405,10 @@ class Weather:
 			curr_hour = 0
 		# Otherwise set the hour normally
 		else:
-			curr_hour = curr_hour + meridiem_coef
+			if curr_hour == 12 and meridiem == "PM":
+				curr_hour = 12
+			else:
+				curr_hour = curr_hour + meridiem_coef
 
 		# Add leading zero if it's a single digit
 		if len(str(curr_hour)) == 1:
@@ -521,14 +524,14 @@ class Weather:
 		return(wunder_data)
 
 
-#if __name__ == "__main__":
+if __name__ == "__main__":
 	'''
 	daily_weather, data_dict = Weather().get_daily_weather("KFTW", "2022-07-22")
 	daily_weather = Weather().convert_to_merica(daily_weather)
 	# Write out to weather location
 	Weather().write_daily_to_csv(daily_weather, global_weather_write_loc)
 	'''
-	'''
+	
 	# Bulk update
 	wunder_dir = "Z:/Projects/ADSB-Flight-Freq-Tracker/data/.wunderground_wthr/"
 	list_of_files = os.listdir(wunder_dir)
@@ -537,7 +540,7 @@ class Weather:
 		w_path = wunder_dir + file
 		wunder_data = Weather().wunderground_convert(w_path)
 		Weather().write_daily_to_csv(wunder_data, global_weather_write_loc)
-	'''
+	
 	'''
 	wunder_path = "Z:/Projects/ADSB-Flight-Freq-Tracker/data/.wunderground_wthr/2022-06-20.csv"
 	wunder_data = Weather().wunderground_convert(wunder_path)

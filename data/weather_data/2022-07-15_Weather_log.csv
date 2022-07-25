@@ -11,7 +11,7 @@ Date,Time,Weekday,BarometricPressure,Temp,WindSpeed,WindDirection,Raining
 2022-07-15,09:00:00,Friday,29.33,87,7,S,No
 2022-07-15,10:00:00,Friday,29.33,90,0,CALM,No
 2022-07-15,11:00:00,Friday,29.32,93,10,SE,No
-2022-07-15,24:00:00,Friday,29.32,94,0,,No
+2022-07-15,12:00:00,Friday,29.32,94,0,,No
 2022-07-15,13:00:00,Friday,29.31,97,13,SE,No
 2022-07-15,14:00:00,Friday,29.29,98,6,VAR,No
 2022-07-15,15:00:00,Friday,29.27,97,8,SE,No
