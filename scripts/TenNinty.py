@@ -134,10 +134,21 @@ class TenNinty_Parser:
 				# If all else incase to keep the 8 row integrity
 				self.dump_data[flight].append('NA')
 
+	def get_closest_hour(self):
+		'''Get the time and find the nearest hour. This is to provide a values to match
+		up with the weather data which only calculates weather every hour.
+		The [8] index will be the placeholder for the closest hour'''
+		for flight in range(len(self.dump_data)):
+			self.dump_data[flight].append(
+ 				str(self.dump_data[flight][2].split(":")[0]) + ":00:00"
+ 				)
+			
+		return(0)
+			
 	def _add_header(self):
 		'''Add header to beginning of array'''
 		return(self.dump_data.insert(0, ['HexCode', 'Date', 'Time', 'FlightNumber', 
-			'Alt', 'GroundSpeed', 'Squawk', 'Airline']))
+			'Alt', 'GroundSpeed', 'Squawk', 'Airline', 'NearestHour']))
     
 	def _format_date(self, date):
 		"""Format date to conform with MySQL standards"""
@@ -197,6 +208,8 @@ class TenNinty_Parser:
 
 		# Add the callsign row 
 		self._add_callsign()
+		# Append the closest hour for easier joining with the weather data 
+		self.get_closest_hour()
 
 	def write_to_csv(self, write_path):
 		''' Writes self.dump to a CSV file that can be used to upload to a DB '''
@@ -209,11 +222,6 @@ class TenNinty_Parser:
 			for row in self.dump_data:
 				data_writer.writerow(row)
 				
-	def get_closest_hour(self):
-		'''OPTIONAL. Get the time and find the nearest hour. Past the 30 min mark rounds up, 
-		under 30 min will round down. This is to provide a values to match up with the weather 
-		data which only calculates weather every hour.'''
-		pass
 		
 class SnapShot:
 	''' This class is to be run with a cron job to take snap shots of the live log 
@@ -311,33 +319,36 @@ else:
 	global_live_feed_loc = pi_prefix + global_live_feed_loc
 	global_raw_copyto_loc = pi_prefix + global_raw_copyto_loc 
 
-'''
-if __name__ =="__main__":
-	# Main entry for running in production mode		
-	if production_mode:
-		# Create copy of the live feed data 
-		snapshot = SnapShot(global_live_feed_loc, global_raw_copyto_loc)
-		snapshot.snap_dat_feed()
-	
-		# Process the captured CSV data using the TenNinty_parser 
-		process_data = TenNinty_Parser(snapshot.get_raw_path())
-	
-		# Write it out to a csv 
-		process_data.get_parsed_data(global_csv_write_loc, use_header=True, to_csv=True)
-	
+
+if __name__ =="__main__":	
+# 	if production_mode:
+# 		# Create copy of the live feed data 
+# 		snapshot = SnapShot(global_live_feed_loc, global_raw_copyto_loc)
+# 		snapshot.snap_dat_feed()
+# 	
+# 		# Process the captured CSV data using the TenNinty_parser 
+# 		process_data = TenNinty_Parser(snapshot.get_raw_path())
+# 	
+# 		# Write it out to a csv 
+# 		process_data.get_parsed_data(global_csv_write_loc, use_header=True, to_csv=True)
+# 	
 	if production_mode == False:
 		"""Only for debugging and developement"""
 	
-		# Process the captured CSV data using the TenNinty_parser 
+# 		# Process the captured CSV data using the TenNinty_parser 
 		raw_data_path = 'Z:/projects/ADSB-Flight-Freq-Tracker/data/adsb_raw_data/'
-		
-		#TenNinty_Parser(raw_data_path).get_parsed_data(global_csv_write_loc, 
-		#											   use_header=True, to_csv=True)
+# 		
+# 		# Path for a single file 
+# 		csv_path = ('Z:/Projects/ADSB-Flight-Freq-Tracker/data/adsb_raw_data' +
+# 					'/live_raw_2022_06_21_000002')
+# 		
+# 		TenNinty_Parser(csv_path).get_parsed_data(global_csv_write_loc, 
+# 													   use_header=True, to_csv=True)
 	    
 		# Manually reproduce the parsed data files from the raw data
 		if force_bulk_update:
 			_bulk_update(raw_data_path)
-'''
+
 
 
 
