@@ -320,34 +320,34 @@ else:
 	global_raw_copyto_loc = pi_prefix + global_raw_copyto_loc 
 
 
-if __name__ =="__main__":	
-# 	if production_mode:
-# 		# Create copy of the live feed data 
-# 		snapshot = SnapShot(global_live_feed_loc, global_raw_copyto_loc)
-# 		snapshot.snap_dat_feed()
+# if __name__ =="__main__":	
+# # 	if production_mode:
+# # 		# Create copy of the live feed data 
+# # 		snapshot = SnapShot(global_live_feed_loc, global_raw_copyto_loc)
+# # 		snapshot.snap_dat_feed()
+# # 	
+# # 		# Process the captured CSV data using the TenNinty_parser 
+# # 		process_data = TenNinty_Parser(snapshot.get_raw_path())
+# # 	
+# # 		# Write it out to a csv 
+# # 		process_data.get_parsed_data(global_csv_write_loc, use_header=True, to_csv=True)
+# # 	
+# 	if production_mode == False:
+# 		"""Only for debugging and developement"""
 # 	
-# 		# Process the captured CSV data using the TenNinty_parser 
-# 		process_data = TenNinty_Parser(snapshot.get_raw_path())
-# 	
-# 		# Write it out to a csv 
-# 		process_data.get_parsed_data(global_csv_write_loc, use_header=True, to_csv=True)
-# 	
-	if production_mode == False:
-		"""Only for debugging and developement"""
-	
-# 		# Process the captured CSV data using the TenNinty_parser 
-		raw_data_path = 'Z:/projects/ADSB-Flight-Freq-Tracker/data/adsb_raw_data/'
-# 		
-# 		# Path for a single file 
-# 		csv_path = ('Z:/Projects/ADSB-Flight-Freq-Tracker/data/adsb_raw_data' +
-# 					'/live_raw_2022_06_21_000002')
-# 		
-# 		TenNinty_Parser(csv_path).get_parsed_data(global_csv_write_loc, 
-# 													   use_header=True, to_csv=True)
-	    
-		# Manually reproduce the parsed data files from the raw data
-		if force_bulk_update:
-			_bulk_update(raw_data_path)
+# # 		# Process the captured CSV data using the TenNinty_parser 
+# 		raw_data_path = 'Z:/projects/ADSB-Flight-Freq-Tracker/data/adsb_raw_data/'
+# # 		
+# # 		# Path for a single file 
+# # 		csv_path = ('Z:/Projects/ADSB-Flight-Freq-Tracker/data/adsb_raw_data' +
+# # 					'/live_raw_2022_06_21_000002')
+# # 		
+# # 		TenNinty_Parser(csv_path).get_parsed_data(global_csv_write_loc, 
+# # 													   use_header=True, to_csv=True)
+# 	    
+# 		# Manually reproduce the parsed data files from the raw data
+# 		if force_bulk_update:
+# 			_bulk_update(raw_data_path)
 
 
 
