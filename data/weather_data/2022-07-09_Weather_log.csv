@@ -11,7 +11,7 @@ Date,Time,Weekday,BarometricPressure,Temp,WindSpeed,WindDirection,Raining
 2022-07-09,09:00:00,Saturday,29.31,92,3,VAR,No
 2022-07-09,10:00:00,Saturday,29.32,95,5,N,No
 2022-07-09,11:00:00,Saturday,29.32,97,3,W,No
-2022-07-09,24:00:00,Saturday,29.30,98,0,,No
+2022-07-09,12:00:00,Saturday,29.30,98,0,,No
 2022-07-09,13:00:00,Saturday,29.28,102,8,NE,No
 2022-07-09,14:00:00,Saturday,29.26,104,3,VAR,No
 2022-07-09,15:00:00,Saturday,29.23,103,0,CALM,No

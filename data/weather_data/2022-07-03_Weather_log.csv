@@ -11,7 +11,7 @@ Date,Time,Weekday,BarometricPressure,Temp,WindSpeed,WindDirection,Raining
 2022-07-03,09:00:00,Sunday,29.26,87,9,S,No
 2022-07-03,10:00:00,Sunday,29.26,89,3,VAR,No
 2022-07-03,11:00:00,Sunday,29.26,93,7,S,No
-2022-07-03,24:00:00,Sunday,29.25,95,12,S,No
+2022-07-03,12:00:00,Sunday,29.25,95,12,S,No
 2022-07-03,13:00:00,Sunday,29.22,96,10,SE,No
 2022-07-03,14:00:00,Sunday,29.20,99,8,S,No
 2022-07-03,15:00:00,Sunday,29.19,100,14,S,No

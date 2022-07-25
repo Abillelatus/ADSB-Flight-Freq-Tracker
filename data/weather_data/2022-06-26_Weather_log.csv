@@ -11,7 +11,7 @@ Date,Time,Weekday,BarometricPressure,Temp,WindSpeed,WindDirection,Raining
 2022-06-26,09:00:00,Sunday,29.37,90,9,NW,No
 2022-06-26,10:00:00,Sunday,29.36,94,12,N,No
 2022-06-26,11:00:00,Sunday,29.35,97,13,NW,No
-2022-06-26,24:00:00,Sunday,29.34,98,10,N,No
+2022-06-26,12:00:00,Sunday,29.34,98,10,N,No
 2022-06-26,13:00:00,Sunday,29.32,99,7,VAR,No
 2022-06-26,14:00:00,Sunday,29.31,99,14,N,No
 2022-06-26,15:00:00,Sunday,29.29,98,0,,No

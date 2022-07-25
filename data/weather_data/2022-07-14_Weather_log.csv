@@ -11,8 +11,8 @@ Date,Time,Weekday,BarometricPressure,Temp,WindSpeed,WindDirection,Raining
 2022-07-14,09:00:00,Thursday,29.27,90,8,S,No
 2022-07-14,10:00:00,Thursday,29.27,96,10,SW,No
 2022-07-14,11:00:00,Thursday,29.27,95,3,E,No
-2022-07-14,24:00:00,Thursday,29.28,94,25,E,No
-2022-07-14,24:00:00,Thursday,29.28,89,26,SE,No
+2022-07-14,12:00:00,Thursday,29.28,94,25,E,No
+2022-07-14,12:00:00,Thursday,29.28,89,26,SE,No
 2022-07-14,13:00:00,Thursday,29.28,85,14,SE,No
 2022-07-14,14:00:00,Thursday,29.28,86,16,S,No
 2022-07-14,15:00:00,Thursday,29.26,88,10,E,No

@@ -11,7 +11,7 @@ Date,Time,Weekday,BarometricPressure,Temp,WindSpeed,WindDirection,Raining
 2022-07-11,09:00:00,Monday,29.16,87,8,E,No
 2022-07-11,10:00:00,Monday,29.15,92,7,VAR,No
 2022-07-11,11:00:00,Monday,29.15,94,8,E,No
-2022-07-11,24:00:00,Monday,29.14,96,3,VAR,No
+2022-07-11,12:00:00,Monday,29.14,96,3,VAR,No
 2022-07-11,13:00:00,Monday,29.12,98,5,VAR,No
 2022-07-11,14:00:00,Monday,29.10,98,9,NE,No
 2022-07-11,15:00:00,Monday,29.08,101,13,NE,No
