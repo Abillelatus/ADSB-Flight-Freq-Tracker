@@ -525,12 +525,12 @@ class Weather:
 
 
 # if __name__ == "__main__":
-# 	'''
+# 	
 # 	daily_weather, data_dict = Weather().get_daily_weather("KFTW", "2022-07-22")
 # 	daily_weather = Weather().convert_to_merica(daily_weather)
 # 	# Write out to weather location
 # 	Weather().write_daily_to_csv(daily_weather, global_weather_write_loc)
-# 	'''
+# 	
 # 	
 # 	# Bulk update
 # 	wunder_dir = "Z:/Projects/ADSB-Flight-Freq-Tracker/data/.wunderground_wthr/"

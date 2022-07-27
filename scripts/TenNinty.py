@@ -266,6 +266,31 @@ class SnapShot:
 		'''Returns path of the copied raw data location''' 
 		return(str(self.new_raw_path))
 	
+	
+class Callsigns:
+	"""Class that reads in parsed data and returns a list of callsigns"""
+	def __init__(self):
+		pass
+	
+	def get_callsigns(self, csv_path):
+		call_signs = set()
+		try:
+			with open(csv_path, newline='') as csvfile:
+				callsign_reader = csv.reader(csvfile, delimiter=',')
+				for row in callsign_reader:
+					# If the header or putty log info is included and needs to skip
+					#callsign_reader.__next__()
+					call_signs.add(row[0])
+
+				csvfile.close()
+			
+			return(list(call_signs))
+
+		except Exception as err:
+			print("Could not open CSV file: ")
+			print(str(err))
+		
+	
 # Function to re-run all raw data in the adsb_raw_data dir and create new 
 # processed data. 
 def _bulk_update(target_dir):
