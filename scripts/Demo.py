@@ -6,6 +6,7 @@
 # Used to showcase the DB projects
 ################################################################################
 
+import matplotlib.pyplot as plt
 from TenNinty import Callsigns
 from DStaxAstraControl import DataStaxAstra
 
@@ -57,4 +58,11 @@ finally:
 	# Always close out the session when done
 	print("Closing Session Connection...")
 	db_session.shutdown()
+
+# Create Charts 
+plt.bar(*zip(*flts_per_wkdy.items()))	
+plt.show()
+	
+	
+	
 
