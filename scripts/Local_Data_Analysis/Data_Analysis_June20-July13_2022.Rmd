@@ -1,0 +1,131 @@
+---
+title: "Data_Analysis_June20-July13_2022"
+author: "Ryan Herrin"
+date: "7/30/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(stringr)
+library(plotly)
+library(ggplot2)
+library(plyr) # Load first before dplyer 
+library(dplyr)
+```
+
+Read in the database. Using a local version for analysis to reduce calls to the cloud
+```{r}
+data_loc <- "../Local_Data_Analysis/DB_Copy_Full.csv"
+flight_data <- read.csv(data_loc, header = TRUE)
+
+# Transform all blank cells to have NA values 
+flight_data[flight_data==""] <- NA
+```
+
+# Metrics / Analysis
+
+### Total number of flights 
+```{r}
+# Get the number of rows (flights captured) throughout the collection period
+num_of_flights <- nrow(flight_data)
+print(num_of_flights)
+```
+
+### Most Popular Airline/Company
+```{r}
+# Create a data frame of the airlines and how many their frequency 
+airline_freq <- as.data.frame(table(flight_data$Airline, useNA = "always"))
+
+# Get the top 15
+top_15_airlines <- as.data.frame(head(arrange(airline_freq, desc(Freq)), n=15))
+top_15_airlines$Var1 <- reorder(top_15_airlines$Var1, -top_15_airlines$Freq)
+
+# Create Bar chart
+airline_freq_bar <- ggplot(top_15_airlines, aes(x=Var1, y=Freq, fill=Var1)) + 
+  geom_col() +
+  ggtitle("Top 15 Airlines") + xlab("Airline Abbreviation") + ylab("Number of Observations") +
+  geom_text(aes(label = Freq), vjust = -0.5)
+# Display
+airline_freq_bar
+```
+
+### Frequency of flights by Wind Direction
+```{r}
+# Frequency of flights base off wind direction
+wind_dirct_freq <- as.data.frame(table(flight_data$WindDirection))
+
+# Create Chart
+wind_bar <- ggplot(wind_dirct_freq, aes(x=Var1, y=Freq, fill=Var1)) +
+  geom_col() +
+  ggtitle("Flights by Wind Direction") + xlab("Wind Direction") + ylab("Number of Observations") +
+  geom_text(aes(label = Freq), vjust = -0.5)
+# Display
+wind_bar
+```
+
+### Frequency of flights determined by day of the week
+```{r}
+# Frequency of Flights depending on the day of the week
+weekday_freq <- as.data.frame(table(flight_data$Weekday))
+weekday_freq$Var1 <- reorder(weekday_freq$Var1, -weekday_freq$Freq)
+
+# Create Chart
+weekday_bar <- ggplot(weekday_freq, aes(x=Var1, y=Freq, fill=Var1)) +
+  geom_col() +
+  ggtitle("Flights by Day of Week") + xlab("Weekday") + ylab("Number of Observations") +
+  geom_text(aes(label = Freq), vjust = -0.5)
+# Display
+weekday_bar
+```
+
+### Frequency of flights by day time series 
+```{r}
+# Create line graph by frequency of flights per day
+time_freq <- as.data.frame(table(flight_data$Date))
+time_freq$Var1 <- as.Date(time_freq$Var1)
+
+flights_by_time <- ggplot(time_freq, aes(x=Var1, y=Freq)) +
+  geom_line(color="steelblue") +
+  geom_point() +
+  xlab("") +
+  ggtitle("Flights by Day") + xlab("Day") + ylab("Number of Observations") +
+  scale_x_date(limit=c(as.Date("2022-06-21"), as.Date("2022-07-12"))) +
+  ylim(1500,NA)
+  
+# Display
+flights_by_time
+```
+
+### Data by Hour of the day
+```{r}
+# Create a data frame for the hours 
+time_data <- data.frame(time = flight_data$Time)
+time_data$time <- strptime(time_data$time, format = "%H:%M:%S")
+time_data$hours <- as.numeric(format(time_data$time, format="%H"))
+
+# Create a histogram
+time_plot <- ggplot(time_data, aes(x=hours)) +
+  geom_histogram(aes(y=..density..), binwidth = .5, color = "black") +
+  geom_density(alpha=.2, fill="#FF6666") +
+  ggtitle("Flights by Hour") + xlab("Hour (In 24H format)") + ylab("Number of Observations")
+  
+# Display 
+time_plot
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
